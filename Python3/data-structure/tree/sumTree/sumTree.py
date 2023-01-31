@@ -21,9 +21,9 @@ class SumTree:
         self._tree[0]+=val
         for i in range(self._hight-1):
             if index & 1 << i:
-                node = node*2-1
+                node = 2*node-1
             else:
-                node = node*2
+                node = 2*node
             self._tree[node-1]+=val
 
     def update(self, index, val):# O(log(n))
