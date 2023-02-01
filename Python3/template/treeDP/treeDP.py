@@ -10,27 +10,10 @@ for _ in range(n-1):
     G[a].append(b)
     G[b].append(a)
 
-fact=[1 for _ in range(n+1)]
-inv=[1 for _ in range(n+1)]
-factinv=[1 for _ in range(n+1)]
-for i in range(2,n+1):
-    fact[i]=(fact[i-1]*i)%mod
-    inv[i]=(-inv[mod%i]*(mod//i))%mod
-    factinv[i]=(factinv[i-1]*inv[i])%mod
-
-def cmb(A):
-    S=sum(A)
-    ans=fact[S]
-    for i in A: 
-        ans*=factinv[i] 
-        ans%=mod
-    return ans
-
 def f(root):
     deg=[len(G[i]) for i in range(n)]
     Q=deque([i for i in range(n) if deg[i]==1])
     DP=[0 for _ in range(n)]
-    subtree_size=[1 for _ in range(n)]
 
     def merge(s,A):
         pass
