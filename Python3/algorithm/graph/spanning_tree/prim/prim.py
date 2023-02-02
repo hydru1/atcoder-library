@@ -1,4 +1,4 @@
-from heapq import heapify,heappush,heappop
+from heapq import heappush,heappop
 
 def Prim(G):
     n=len(G)
@@ -9,7 +9,6 @@ def Prim(G):
     visit_cnt += 1
 
     q = []
-    heapify(q)
 
     for j, c in G[0]:
         heappush(q,(c,j,0))

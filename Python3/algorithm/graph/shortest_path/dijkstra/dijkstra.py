@@ -1,11 +1,10 @@
-from heapq import heapify,heappop,heappush
+from heapq import heappop,heappush
 
 def dijkstra(G,r):
     inf=2**61-1
 
     v=len(G)
     Q=[(0,r)]
-    heapify(Q)
     dist=[inf for _ in range(v)]
 
     while(Q):
