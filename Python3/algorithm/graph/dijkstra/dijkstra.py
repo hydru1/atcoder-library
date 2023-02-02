@@ -1,9 +1,9 @@
 from heapq import heapify,heappop,heappush
 
 def dijkstra(G,r):
-    v=len(G)
     inf=2**61-1
 
+    v=len(G)
     Q=[(0,r)]
     heapify(Q)
     dist=[inf for _ in range(v)]
