@@ -1,41 +1,39 @@
 import sys
 sys.setrecursionlimit(10**8)
 
-def LowLinks(G, root=0):
- 
-    v=len(G)
+class LowLinks:
+    def __init__(self, G, root=0):
+        v=len(G)
+        self.G = G
+        self.root = root
+        self.ord = [None] * v
+        self.low = [None] * v
+        self.cnt = 0
+        self.bridges = []
+        self.articulations = set()
+        self.par = [None] * v
+        self.search(self.root)
 
-    ord = [None] * v
-    low = [None] * v
-    bridges = []
-    articulations = set()
-    par = [None] * v
-
-
-    def search(x,cnt):
-        ord[x] = cnt
-        low[x] = cnt
-        cnt += 1
+    def search(self, x):
+        self.ord[x] = self.cnt
+        self.low[x] = self.cnt
+        self.cnt += 1
         dim = 0
-        for to in G[x]:
-            if to == par[x]:continue
-            if ord[to] != None:
-                low[x] = min(low[x], ord[to])
+        for to in self.G[x]:
+            if to == self.par[x]:continue
+            if self.ord[to] != None:
+                self.low[x] = min(self.low[x], self.ord[to])
             else:
-                par[to] = x
-                search(to,cnt)
+                self.par[to] = x
+                self.search(to)
                 dim += 1
-                low[x] = min(low[x], low[to])
+                self.low[x] = min(self.low[x], self.low[to])
 
-                if x != root and ord[x] <= low[to]:
-                    articulations.add(x)
+                if x != self.root and self.ord[x] <= self.low[to]:
+                    self.articulations.add(x)
 
-            if x == root and dim > 1:
-                articulations.add(x)
+            if x == self.root and dim > 1:
+                self.articulations.add(x)
 
-            if ord[x] < low[to]:
-                bridges.append((x, to))
-    
-    search(root,0)
-
-    return bridges
+            if self.ord[x] < self.low[to]:
+                self.bridges.append((x, to))
