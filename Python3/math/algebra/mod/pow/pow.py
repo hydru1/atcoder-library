@@ -1,5 +1,5 @@
 #m**nをpZ/Z上で求める
-def mod_pow(m,n,p):
+def pow(m,n,p):
     if n>=0:
         return pow(m,n,p)
     else:
